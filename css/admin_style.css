@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap');
 
 :root{
-   --pink:#e84393;
+   --gold:#d1bb7b;
    --red:#c0392b;
-   --orange:#f39c12;
+   --silver:#9c938d;
    --black:#333;
    --white:#fff;
    --light-color:#666;
@@ -126,7 +126,7 @@ section{
 }
 
 .option-btn{
-   background-color: var(--orange);
+   background-color: var(--silver);
 }
 
 .btn:hover,
@@ -195,7 +195,7 @@ section{
 }
 
 .header .flex .account-box div a{
-   color:var(--orange);
+   color:var(--silver);
 }
 
 .header .flex .account-box div a:hover{

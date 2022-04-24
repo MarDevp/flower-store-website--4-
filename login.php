@@ -1,17 +1,22 @@
 <?php
 
-@include 'config.php';
+@include 'config.php'; // contient fichier de connexion à la base
+
+// $_POST pour créer un tableau associatif avec une clé d'accès ($_POST['name']).
 
 session_start();
 
 if(isset($_POST['submit'])){
 
-   $filter_email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
-   $email = mysqli_real_escape_string($conn, $filter_email);
+   $filter_email = filter_var($_POST['email'], FILTER_SANITIZE_STRING); // pour supprimer ou encoder les caractères spéciaux de l'email
+   $email = mysqli_real_escape_string($conn, $filter_email); // pour protèger les caractères spéciaux de l'email pour l'utiliser dans une requête SQL,
    $filter_pass = filter_var($_POST['pass'], FILTER_SANITIZE_STRING);
    $pass = mysqli_real_escape_string($conn, md5($filter_pass));
 
+   // Requête pour vérifier que l'adresse mail et le mdp sont corrects
    $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email' AND password = '$pass'") or die('query failed');
+
+   
 
 
    if(mysqli_num_rows($select_users) > 0){
@@ -20,6 +25,8 @@ if(isset($_POST['submit'])){
 
       if($row['user_type'] == 'admin'){
 
+
+         //Un tableau associatif des valeurs stockées dans les sessions pour récuperer les info de l'admin
          $_SESSION['admin_name'] = $row['name'];
          $_SESSION['admin_email'] = $row['email'];
          $_SESSION['admin_id'] = $row['id'];
@@ -27,6 +34,7 @@ if(isset($_POST['submit'])){
 
       }elseif($row['user_type'] == 'user'){
 
+        //Un tableau associatif des valeurs stockées dans les sessions pour récuperer les info de l'utilisateur
          $_SESSION['user_name'] = $row['name'];
          $_SESSION['user_email'] = $row['email'];
          $_SESSION['user_id'] = $row['id'];
